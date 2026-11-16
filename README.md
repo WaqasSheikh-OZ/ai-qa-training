@@ -19,4 +19,4 @@ Adjust `BASE_URL`, `BROWSER`, or `HEADLESS` in `.env` for your local environment
 pytest
 ```
 
-Test modules and page objects are placeholders. No application-specific locators, interactions, or test scenarios are included yet.
+
