@@ -1,0 +1,1 @@
+"""Product listing test module; scenarios will be added later."""
