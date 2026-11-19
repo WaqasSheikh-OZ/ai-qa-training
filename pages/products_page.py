@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from playwright.sync_api import Locator, Page
+from pages.product_details_page import ProductDetailsPage
 
 
 class ProductsPage(BasePage):
@@ -26,3 +27,7 @@ class ProductsPage(BasePage):
 
     def get_products_page_title(self) -> Locator:
         return self._page_title
+
+    def click_nth_product(self, index: int) -> Page:
+        self._product_cards.nth(index).click()
+        return ProductDetailsPage(self.page)
