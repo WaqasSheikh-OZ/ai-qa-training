@@ -33,4 +33,7 @@ class HeaderComponent:
     def select_category(self, category_name: str) -> None:
         self.page.get_by_text(category_name,exact=True).click()
 
+    def click_contact(self) -> None:
+        self.page.locator('[data-test="nav-contact"]').click()
+
     

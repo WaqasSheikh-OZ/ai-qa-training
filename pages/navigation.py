@@ -2,6 +2,7 @@ from playwright.sync_api import Page
 
 from components.header_component import HeaderComponent
 from pages.cart_page import CartPage
+from pages.contact_page import ContactPage
 from pages.home_page import HomePage
 from pages.products_page import ProductsPage
 
@@ -23,3 +24,7 @@ class Navigation:
         self._header.click_categories()
         self._header.select_category(category_name)
         return ProductsPage(self._page)
+
+    def open_contact(self) -> ContactPage:
+        self._header.click_contact()
+        return ContactPage(self._page)

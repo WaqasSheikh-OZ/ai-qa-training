@@ -51,6 +51,9 @@ def test_add_product_to_cart(navigation):
 Use `navigation.open_home()` to open the home page and
 `navigation.open_category(name)` for category transitions from the current
 page. Tests use returned page objects rather than constructing them.
+`navigation.open_contact()` opens the contact form. The contact page object's
+incomplete-form submit helper refuses completed forms and blocks outgoing POST
+requests; never submit a completed contact form because it sends a real message.
 Keep `Navigation` out of `BasePage` and component imports so dependencies remain
 one-way and do not introduce circular imports.
 

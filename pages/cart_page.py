@@ -21,6 +21,9 @@ class CartPage(BasePage):
     def get_cart_table(self) -> Locator:
         return self._cart_table
 
+    def get_cart_total(self) -> Locator:
+        return self.page.locator('[data-test="cart-total"]')
+
     def get_cart_rows(self) -> Locator:
         return self._cart_rows
 
