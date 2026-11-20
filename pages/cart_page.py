@@ -10,19 +10,31 @@ class CartPage(BasePage):
     _PRODUCT_QUANTITY = '[data-test="product-quantity"]'
     _PRODUCT_PRICE = '[data-test="product-price"]'
     _LINE_PRICE = '[data-test="line-price"]'
+    _CART_TOTAL = '[data-test="cart-total"]'
     _REMOVE_ITEM_BUTTON = "a.btn.btn-danger"
+    _EMPTY_CART_MESSAGE = "The cart is empty. Nothing to display."
 
     def __init__(self, page: Page):
         super().__init__(page)
         self._cart_table = page.locator(self._CART_TABLE)
-        self._cart_rows = page.locator(self._CART_ROWS)
+        self._cart_rows = page.locator(self._CART_ROWS).filter(
+            has=page.locator(self._PRODUCT_TITLE)
+        )
         self._product_titles = page.locator(self._PRODUCT_TITLE)
+        self._cart_total = page.locator(self._CART_TOTAL)
+        self._empty_cart_message = page.get_by_text(self._EMPTY_CART_MESSAGE)
 
     def get_cart_table(self) -> Locator:
         return self._cart_table
 
     def get_cart_total(self) -> Locator:
-        return self.page.locator('[data-test="cart-total"]')
+        return self._cart_total
+
+    def get_cart_total_text(self) -> str:
+        return self._cart_total.inner_text()
+
+    def get_empty_message(self) -> Locator:
+        return self._empty_cart_message
 
     def get_cart_rows(self) -> Locator:
         return self._cart_rows

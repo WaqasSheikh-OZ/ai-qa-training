@@ -51,11 +51,38 @@ def test_add_product_to_cart(navigation):
 Use `navigation.open_home()` to open the home page and
 `navigation.open_category(name)` for category transitions from the current
 page. Tests use returned page objects rather than constructing them.
-`navigation.open_contact()` opens the contact form. The contact page object's
-incomplete-form submit helper refuses completed forms and blocks outgoing POST
-requests; never submit a completed contact form because it sends a real message.
 Keep `Navigation` out of `BasePage` and component imports so dependencies remain
 one-way and do not introduce circular imports.
+
+## Product listings, search and sorting
+
+The home page and category pages share the same product grid and left sidebar,
+so both are modelled as components and composed into the pages:
+
+- `ProductListComponent` owns product cards, prices, eco badges, search result
+  messages and pagination. `get_all_products()` collects every page and returns
+  to page 1.
+- `ProductsSidebarComponent` owns search, clear search and sorting.
+- `HomePage` composes both and adds flows such as `search(word)`,
+  `clear_search()`, `sort_by(option)` and `search_and_open_product(name)`.
+  `ProductsPage` (category pages) composes the same components.
+
+Page objects wait for observable UI state: `open_home()` waits for the initial
+catalog, searches wait for the app's search-completed marker, and sorting waits
+for the sorting-completed marker.
+
+## Test data, helpers and markers
+
+Test data lives in `test_data/test_data.json` and is available through the
+session-scoped `test_data` fixture. Shared helpers such as `parse_price` and
+`format_price` live in `utilities/helpers.py`. Tests contain no locators or
+helper functions; they call page-object methods and assert the outcome.
+
+Assignment tests are marked `assignment1` or `assignment2` (registered in
+`pytest.ini`), so `pytest -m assignment2` runs only the Week 2 tests.
+
+The contact page's `submit_incomplete()` refuses to press Send on a completed
+form and blocks outgoing writes, because a sent form reaches a real inbox.
 
 The cart test verifies navigation from home, category, and product-details pages
 after adding an item, since the application does not expose the cart control

@@ -1,1 +1,30 @@
-{}
+{
+  "search": {
+    "matching_word": "hammer",
+    "second_matching_word": "pliers",
+    "unmatched_word": "zzzzqwerty-no-such-product"
+  },
+  "sorting": {
+    "price_high_to_low": "Price (High - Low)",
+    "name_z_to_a": "Name (Z - A)",
+    "category": "Power Tools"
+  },
+  "products": {
+    "non_eco": "Combination Pliers",
+    "second_non_eco": "Hammer",
+    "eco": "Wood Saw",
+    "out_of_stock": "Long Nose Pliers"
+  },
+  "cart": {
+    "typed_quantity": 3,
+    "updated_quantity": 2,
+    "eco_quantity": 2
+  },
+  "contact": {
+    "first_name": "Alex",
+    "last_name": "Tester",
+    "email": "alex@example.com",
+    "subject": "Customer service",
+    "message": "This is a sample message long enough to check form retention safely."
+  }
+}

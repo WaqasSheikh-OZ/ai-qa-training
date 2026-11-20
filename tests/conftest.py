@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import Page, sync_playwright
 from pages.home_page import HomePage
 from pages.navigation import Navigation
-from components.header_component import HeaderComponent
+from utilities.test_data import load_test_data
 
 from config.settings import BROWSER, HEADLESS, BASE_URL
 
@@ -32,4 +32,9 @@ def home_page(page: Page) -> HomePage:
 @pytest.fixture
 def navigation(page: Page) -> Navigation:
     return Navigation(page)
+
+
+@pytest.fixture(scope="session")
+def test_data() -> dict:
+    return load_test_data()
 
