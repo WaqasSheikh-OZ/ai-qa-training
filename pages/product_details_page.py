@@ -42,13 +42,14 @@ class ProductDetailsPage(BasePage):
     def get_quantity_input(self) -> Locator:
         return self._quantity_input
 
-    def set_quantity(self, quantity: int) -> None:
+    def set_quantity(self, quantity: int | str) -> None:
+        # Accepts raw text so data-driven tests can enter empty or out-of-range values.
         self._quantity_input.fill(str(quantity))
 
     def get_add_to_cart_button(self) -> Locator:
         return self._add_to_cart_button
 
-    def add_to_cart(self, quantity: int | None = None) -> None:
+    def add_to_cart(self, quantity: int | str | None = None) -> None:
         if quantity is not None:
             self.set_quantity(quantity)
         self._add_to_cart_button.click()

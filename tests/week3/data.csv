@@ -1,0 +1,11 @@
+test_id,scenario,input_type,product,quantity_input,expected_quantity,expected_message,verification
+qty_1_minimum,Lowest allowed quantity,valid,Combination Pliers,1,1,Product added to shopping cart.,verified
+qty_3_typed,Typical typed quantity (Week 2 TC-09),valid,Combination Pliers,3,3,Product added to shopping cart.,verified
+qty_10_two_digits,Two-digit quantity,valid,Combination Pliers,10,10,Product added to shopping cart.,verified
+qty_50_mid_range,Mid-range quantity,valid,Combination Pliers,50,50,Product added to shopping cart.,proposed
+qty_99_maximum,Highest allowed quantity,boundary,Combination Pliers,99,99,Product added to shopping cart.,verified
+qty_100_above_maximum,Above maximum is capped at 99,unacceptable,Combination Pliers,100,99,You can order at most 99 of this product.,verified
+qty_0_zero,Zero falls back to 1,unacceptable,Combination Pliers,0,1,Product added to shopping cart.,verified
+qty_minus_1_negative,Negative falls back to 1,unacceptable,Combination Pliers,-1,1,Product added to shopping cart.,verified
+qty_empty,Empty field falls back to 1,unacceptable,Combination Pliers,,1,Product added to shopping cart.,verified
+qty_2_5_decimal,Decimal is truncated to a whole number,unacceptable,Combination Pliers,2.5,2,Product added to shopping cart.,proposed

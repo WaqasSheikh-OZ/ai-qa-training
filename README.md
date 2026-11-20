@@ -11,7 +11,7 @@ python -m pip install -r requirements.txt
 python -m playwright install chromium
 ```
 
-Adjust `BASE_URL`, `BROWSER`, or `HEADLESS` in `.env` for your local environment. The `.env` file is ignored by Git.
+Adjust `BASE_URL`, `API_BASE_URL`, `BROWSER`, or `HEADLESS` in `.env` for your local environment. The `.env` file is ignored by Git.
 
 ## Run tests
 
@@ -78,8 +78,28 @@ session-scoped `test_data` fixture. Shared helpers such as `parse_price` and
 `format_price` live in `utilities/helpers.py`. Tests contain no locators or
 helper functions; they call page-object methods and assert the outcome.
 
-Assignment tests are marked `assignment1` or `assignment2` (registered in
-`pytest.ini`), so `pytest -m assignment2` runs only the Week 2 tests.
+Assignment tests are marked `assignment1`, `assignment2` or `assignment3`
+(registered in `pytest.ini`), so `pytest -m assignment2` runs only the Week 2 tests.
+
+## Data-driven tests (Week 3)
+
+`tests/week3/data.csv` holds one row per quantity scenario. `load_csv_params()`
+in `utilities/test_data.py` turns each row into a `pytest.param` named by its
+`test_id`, so `pytest tests/week3 -v` lists every row as its own test. Empty
+cells stay empty strings. The `verification` column marks rows whose expected
+result was observed on the live site (`verified`) versus not yet manually
+confirmed (`proposed`). Toast notifications are read through `page.toast`
+(`ToastComponent`, composed into `BasePage`).
+
+## API tests
+
+The `api/` package keeps HTTP calls out of page objects. `BaseApiClient` wraps
+Playwright's synchronous `APIRequestContext`; endpoint clients such as
+`ProductsApi.get_products()` add only the endpoints the tests need. The
+session-scoped `api_request_context` fixture uses `API_BASE_URL` (default
+`https://api.practicesoftwaretesting.com`) and shares the session `playwright`
+fixture with `browser`. Tests request `products_api` and compare API values with
+UI values read through page objects.
 
 The contact page's `submit_incomplete()` refuses to press Send on a completed
 form and blocks outgoing writes, because a sent form reaches a real inbox.

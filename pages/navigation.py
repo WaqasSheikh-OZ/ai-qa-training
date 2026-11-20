@@ -10,6 +10,7 @@ from pages.products_page import ProductsPage
 
 class Navigation:
     _HOME_PATH = "/"
+    _PRODUCT_PATH = "/product/{product_id}"
 
     def __init__(self, page: Page) -> None:
         self._page = page
@@ -37,3 +38,6 @@ class Navigation:
     def open_product_link(self, href: str) -> ProductDetailsPage:
         self._page.goto(href)
         return ProductDetailsPage(self._page)
+
+    def open_product_by_id(self, product_id: str) -> ProductDetailsPage:
+        return self.open_product_link(self._PRODUCT_PATH.format(product_id=product_id))
